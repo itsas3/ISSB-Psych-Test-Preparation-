@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISSB Psych Test Preparation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#0f172a;
+    --bg2:#1e293b;
+    --accent:#38bdf8;
+    --accent2:#818cf8;
+    --wat-en:#3b82f6;
+    --wat-ur:#a855f7;
+    --sc-en:#f59e0b;
+    --sc-ur:#10b981;
+    --card:#ffffff;
+    --text-dark:#1e293b;
+    --text-muted:#64748b;
+    --danger:#ef4444;
+    --success:#22c55e;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Poppins', sans-serif;
+    background: radial-gradient(circle at top left, #1e293b, #0f172a 60%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    color:var(--text-dark);
+  }
+
+  .container{
+    background: var(--card);
+    padding:44px 40px;
+    border-radius:24px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+    max-width:680px;
+    width:100%;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .container::before{
+    content:"";
+    position:absolute;
+    top:-80px; right:-80px;
+    width:220px; height:220px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    opacity:0.12;
+    border-radius:50%;
+  }
+
+  header{
+    text-align:center;
+    margin-bottom:32px;
+    position:relative;
+    z-index:1;
+  }
+
+  .badge{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:1.5px;
+    font-weight:600;
+    color:var(--accent2);
+    background:#eef2ff;
+    padding:6px 14px;
+    border-radius:20px;
+    margin-bottom:14px;
+    text-transform:uppercase;
+  }
+
+  h1{
+    font-size:28px;
+    font-weight:800;
+    color:#0f172a;
+    margin:0 0 6px;
+  }
+
+  .subtitle{
+    color:var(--text-muted);
+    font-size:14.5px;
+    margin:0;
+  }
+
+  .hidden{ display:none !important; }
+
+  /* ---------- Screen 1: Category menu ---------- */
+  .btn-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    position:relative;
+    z-index:1;
+  }
+
+  .mode-btn{
+    padding:22px 16px;
+    border:none;
+    border-radius:16px;
+    color:white;
+    font-family:inherit;
+    font-weight:600;
+    font-size:15.5px;
+    cursor:pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    text-align:center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  }
+
+  .mode-btn .icon{ font-size:26px; }
+  .mode-btn small{ font-weight:400; opacity:0.85; font-size:12px; }
+
+  .mode-btn:hover{ transform: translateY(-4px); box-shadow:0 14px 26px rgba(0,0,0,0.22); }
+  .mode-btn:active{ transform: translateY(-1px); }
+
+  .btn-wat-en{ background: linear-gradient(135deg, var(--wat-en), #60a5fa); }
+  .btn-wat-ur{ background: linear-gradient(135deg, var(--wat-ur), #c084fc); }
+  .btn-sc-en{ background: linear-gradient(135deg, var(--sc-en), #fbbf24); }
+  .btn-sc-ur{ background: linear-gradient(135deg, var(--sc-ur), #34d399); }
+
+  .settings{
+    margin-top:26px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-size:13.5px;
+    color:var(--text-muted);
+    position:relative;
+    z-index:1;
+  }
+
+  .settings select{
+    border:1px solid #e2e8f0;
+    border-radius:8px;
+    padding:6px 10px;
+    font-family:inherit;
+    font-size:13.5px;
+    background:#f8fafc;
+    cursor:pointer;
+  }
+
+  /* ---------- Screen 2: Test picker ---------- */
+  #test-picker{ position:relative; z-index:1; }
+
+  .back-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+
+  .back-btn{
+    border:none;
+    background:#f1f5f9;
+    color:#334155;
+    font-family:inherit;
+    font-weight:600;
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .back-btn:hover{ background:#e2e8f0; }
+
+  .picker-title{
+    font-size:18px;
+    font-weight:700;
+    color:#0f172a;
+  }
+
+  .test-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+  }
+
+  .test-card{
+    border:2px solid #e2e8f0;
+    background:#f8fafc;
+    border-radius:16px;
+    padding:22px 12px;
+    text-align:center;
+    cursor:pointer;
+    transition: 0.2s;
+  }
+
+  .test-card:hover{
+    border-color: var(--accent);
+    background:#eff6ff;
+    transform: translateY(-3px);
+  }
+
+  .test-card .num{
+    font-size:30px;
+    font-weight:800;
+    color:#0f172a;
+    margin-bottom:4px;
+  }
+
+  .test-card .label{
+    font-size:12.5px;
+    color:var(--text-muted);
+    font-weight:600;
+  }
+
+  .test-card .count{
+    margin-top:8px;
+    font-size:11px;
+    color:var(--accent2);
+    font-weight:600;
+    background:#eef2ff;
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:20px;
+  }
+
+  /* ---------- Screen 3: Test Area ---------- */
+  #test-area{ position:relative; z-index:1; text-align:center; }
+
+  .test-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+  }
+
+  .mode-label{
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-muted);
+    background:#f1f5f9;
+    padding:6px 12px;
+    border-radius:20px;
+  }
+
+  .progress-text{
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-muted);
+  }
+
+  .progress-track{
+    width:100%;
+    height:6px;
+    background:#e2e8f0;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:34px;
+  }
+
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius:10px;
+    transition: width 0.3s ease;
+  }
+
+  .timer-ring{
+    position:relative;
+    width:120px;
+    height:120px;
+    margin:0 auto 30px;
+  }
+
+  .timer-ring svg{ transform: rotate(-90deg); width:120px; height:120px; }
+
+  .timer-ring circle{
+    fill:none;
+    stroke-width:8;
+  }
+
+  .ring-bg{ stroke:#e2e8f0; }
+  .ring-fg{
+    stroke: var(--accent);
+    stroke-linecap:round;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+  }
+
+  .timer-num{
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    font-weight:700;
+    color:#0f172a;
+  }
+
+  #word-display{
+    font-size:46px;
+    font-weight:700;
+    color:#0f172a;
+    margin:10px 0 36px;
+    min-height:64px;
+    word-break:break-word;
+    line-height:1.3;
+  }
+
+  #word-display.urdu-text{
+    font-family:'Noto Nastaliq Urdu', serif;
+    direction:rtl;
+    font-size:40px;
+  }
+
+  .controls{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .ctrl-btn{
+    padding:12px 22px;
+    border:none;
+    border-radius:12px;
+    font-family:inherit;
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    transition:0.2s;
+  }
+
+  .btn-pause{ background:#f1f5f9; color:#334155; }
+  .btn-pause:hover{ background:#e2e8f0; }
+
+  .btn-skip{ background:#eef2ff; color:var(--accent2); }
+  .btn-skip:hover{ background:#e0e7ff; }
+
+  .btn-exit{ background:#fef2f2; color:var(--danger); }
+  .btn-exit:hover{ background:#fee2e2; }
+
+  .finished-box{ padding:20px 10px 6px; }
+  .finished-box .icon{ font-size:52px; margin-bottom:12px; }
+  .finished-box h2{ font-size:24px; margin:0 0 8px; color:#0f172a; }
+  .finished-box p{ color:var(--text-muted); margin:0 0 24px; font-size:14.5px; }
+
+  footer.credit{
+    text-align:center;
+    margin-top:26px;
+    font-size:11.5px;
+    color:#94a3b8;
+    position:relative;
+    z-index:1;
+  }
+
+  @media (max-width:480px){
+    .container{ padding:30px 22px; }
+    h1{ font-size:22px; }
+    #word-display{ font-size:34px; }
+    .mode-btn{ padding:18px 10px; font-size:14px; }
+    .test-grid{ gap:10px; }
+    .test-card{ padding:16px 6px; }
+    .test-card .num{ font-size:24px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">ISSB Preparation</span>
+      <h1 id="main-title">Psych Test Practice</h1>
+      <p class="subtitle" id="subtitle">Word Association &amp; Sentence Completion trainer — 3 full tests per category, 120 items each</p>
+    </header>
+
+    <!-- Screen 1: Category Menu -->
+    <div id="menu">
+      <div class="btn-grid">
+        <button class="mode-btn btn-wat-en" onclick="openPicker('WAT English')">
+          <span class="icon">🧠</span>
+          WAT — English
+          <small>Word Association Test</small>
+        </button>
+        <button class="mode-btn btn-wat-ur" onclick="openPicker('WAT Urdu')">
+          <span class="icon">🧠</span>
+          WAT — اردو
+          <small>ورڈ ایسوسی ایشن ٹیسٹ</small>
+        </button>
+        <button class="mode-btn btn-sc-en" onclick="openPicker('SC English')">
+          <span class="icon">✍️</span>
+          Sentence Completion
+          <small>English</small>
+        </button>
+        <button class="mode-btn btn-sc-ur" onclick="openPicker('SC Urdu')">
+          <span class="icon">✍️</span>
+          جملہ مکمل کریں
+          <small>Urdu</small>
+        </button>
+      </div>
+
+      <div class="settings">
+        <label for="durationSelect">Time per item:</label>
+        <select id="durationSelect">
+          <option value="10" selected>10 seconds</option>
+          <option value="15">15 seconds</option>
+          <option value="20">20 seconds</option>
+          <option value="30">30 seconds (SC recommended)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Screen 2: Test 1/2/3 picker -->
+    <div id="test-picker" class="hidden">
+      <div class="back-row">
+        <button class="back-btn" onclick="backToMenu()">← Back</button>
+        <span class="picker-title" id="picker-title">Choose a test</span>
+      </div>
+      <div class="test-grid" id="test-grid"></div>
+    </div>
+
+    <!-- Screen 3: Running Test -->
+    <div id="test-area" class="hidden">
+      <div class="test-header">
+        <span class="mode-label" id="mode-label">WAT English</span>
+        <span class="progress-text" id="progress-text">0 / 0</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="timer-ring">
+        <svg>
+          <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+          <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <div class="timer-num" id="timer-num">10</div>
+      </div>
+
+      <div id="word-display">Ready</div>
+
+      <div class="controls">
+        <button class="ctrl-btn btn-pause" id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+        <button class="ctrl-btn btn-skip" onclick="skipItem()">⏭ Skip</button>
+        <button class="ctrl-btn btn-exit" onclick="exitTest()">✕ Exit</button>
+      </div>
+    </div>
+
+    <!-- Screen 4: Finished -->
+    <div id="finish-area" class="hidden">
+      <div class="finished-box">
+        <div class="icon">🎉</div>
+        <h2>Test Complete!</h2>
+        <p id="finish-summary">You've gone through this test. Review your responses and try another set.</p>
+        <div class="controls">
+          <button class="ctrl-btn btn-pause" onclick="backToPickerFromFinish()">↺ Choose Another Test</button>
+          <button class="ctrl-btn btn-exit" onclick="exitTest()">✕ Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="credit">Practice tool for ISSB psychological assessment preparation</footer>
+  </div>
+
+<script>
+const data = {
+  "WAT English": [
+    ["Ability","Accept","Achieve","Active","Admire","Advance","Advise","Aim","Alert","Ambitious","Appear","Appreciate","Army","Aspire","Assist","Believe","Best","Brave","Build","Calm","Career","Cheer","Clear","Comfort","Commit","Common","Company","Confident","Connect","Construct","Control","Cooperation","Courage","Create","Dare","Decide","Defense","Delight","Depend","Desire","Devote","Discipline","Donate","Duty","Earnest","Easy","Educate","Effort","Encourage","Energy","Enjoy","Enthusiastic","Excellent","Experience","Faith","Famous","Family","Fast","Father","Finish","Fit","Flourish","Focus","Friend","Gain","General","Generous","Goal","Gratitude","Growth","Guide","Happiness","Hardwork","Health","Help","Hero","Honesty","Honour","Hope","Humility","Idea","Improve","Inspire","Intelligence","Interest","Join","Joy","Justice","Kind","Knowledge","Leader","Learn","Life","Logic","Love","Loyal","Manners","Mature","Memory","Mind","Mission","Moral","Mother","Nation","Natural","Neat","Noble","Obey","Officer","Opportunity","Optimism","Order","Organize","Passion","Patriot","Patience","Peace","Perform","Plan","Polite"],
+    ["Positive","Power","Practice","Praise","Prepare","Progress","Protect","Proud","Punctual","Purpose","Quality","Quick","Quiet","Read","Reason","Reliable","Respect","Responsibility","Reward","Right","Rise","Rule","Safe","Satisfy","Save","Science","Secure","Selfless","Serve","Sharp","Simple","Sincere","Smile","Smart","Social","Solid","Solve","Speak","Speed","Spirit","Stable","Steady","Strength","Strive","Strong","Struggle","Study","Success","Support","Sympathy","System","Talk","Task","Team","Think","Time","Tolerance","Touch","Training","Trust","Truth","Unity","Value","Victory","Virtue","Vision","Voice","Wisdom","Work","Worth","Youth","Zeal","Integrity","Initiative","Command","Loss","Pressure","Accident","Conflict","Fitness","Community","Safety","Atom","Step","Eat","Snake","Blood","Insult","Alone","Angry","Enemy","Tiger","Lion","Gun","Bomb","Attack","Defeat","Death","Coward","Crazy","School","Girl","Boy","TV","Radio","Newspaper","Cinema","Football","Cricket","Hockey","Uniform","Medal","Salute","Parade","Border","Martyr","Sacrifice","Freedom","Independence","Flag"],
+    ["Anthem","Constitution","Vote","Election","Democracy","Corruption","Poverty","Illiteracy","Terrorism","Drought","Flood","Earthquake","Disaster","Rescue","Ambulance","Hospital","Doctor","Nurse","Patient","Medicine","Surgery","Injury","Wound","Recovery","Exercise","Diet","Sleep","Rest","Relax","Vacation","Holiday","Festival","Wedding","Birthday","Anniversary","Gift","Surprise","Party","Music","Dance","Song","Movie","Drama","Story","Novel","Poem","Poet","Writer","Artist","Painting","Sculpture","Museum","Library","Magazine","Internet","Computer","Mobile","Technology","Robot","Space","Rocket","Satellite","Astronaut","Moon","Planet","Universe","Galaxy","Ocean","Mountain","Forest","Desert","Jungle","Wildlife","Animal","Bird","Fish","Insect","Plant","Tree","Flower","Fruit","Vegetable","Grain","Harvest","Farmer","Field","Irrigation","Rain","Storm","Thunder","Lightning","Wind","Cloud","Sky","Star","Sun","Earth","River","Lake","Bridge","Road","Vehicle","Traffic","Journey","Travel","Map","Direction","Distance","Fuel","Engine","Machine","Factory","Industry","Trade","Business","Market","Bank","Money","Wealth","Poor"],
+  ],
+  "WAT Urdu": [
+    ["وطن","محنت","صحت","مشین","کامیابی","دوست","والدین","بہادری","سچ","نظم و ضبط","قربانی","علم","استاد","کتاب","کھیل","نماز","امن","اتحاد","قانون","شرافت","فرض","ایمان","حوصلہ","کردار","دعا","عزت","ہمدردی","خدمت","وفاداری","فخر","شجاعت","بہتر","خوشحالی","ترقی","محبت","خلوص","سچائی","اعتماد","جرات","تدبیر","نیت","خیر","خوشی","صبر","استقامت","عمل","فکر","توجہ","مقصد","عزم","رہنمائی","ذمہ داری","غیرت","ایمانداری","پہچان","ذہانت","سلیقہ","نرمی","سختی","معافی","تکلیف","ڈر","موت","دشمن","شکست","پریشانی","بے چینی","غصہ","حسد","لالچ","خود غرضی","جھوٹ","فریب","کاہلی","سستی","تکبر","ناشکری","برائی","ظلم","انصاف","مساوات","حق","آزادی","تاریکی","روشنی","سایہ","خواب","حقیقت","نشان","منزل","راستہ","سفر","پرواز","بلندی","پستی","جنگ","دفاع","طاقت","ہمت","شکر","ثبات","فیصلہ","اصول","تہذیب","ثقافت","تاریخ","ورثہ","تعلیم","تربیت","آداب","مشورہ","بصیرت","تدریس","تحقیق","فنون","سائنس","ٹیکنالوجی","صنعت","زراعت","تجارت"],
+    ["معیشت","سیاست","حکمرانی","انتظام","ادارہ","سربراہ","پارٹی","تنظیم","اصلاح","انقلاب","تغییر","بہبود","انسانیت","فلاح","کائنات","فطرت","ماحول","موسم","فضا","چاند","سورج","ستارے","آسمان","زمین","پانی","ہوا","آگ","مٹی","پہاڑ","دریا","سمندر","باغ","پھول","رنگ","خوشبو","فوج","سپاہی","کپتان","جرنیل","سرحد","شہید","پرچم","ترانہ","آئین","ووٹ","انتخابات","جمہوریت","بدعنوانی","غربت","ناخواندگی","دہشتگردی","سیلاب","زلزلہ","آفت","بچاؤ","ہسپتال","ڈاکٹر","نرس","مریض","دوا","آپریشن","زخم","صحتیابی","ورزش","نیند","آرام","تعطیل","تہوار","شادی","سالگرہ","تحفہ","موسیقی","رقص","گیت","فلم","کہانی","ناول","شاعر","مصور","عجائب گھر","لائبریری","اخبار","انٹرنیٹ","کمپیوٹر","موبائل","سائنس دان","خلا","سیارہ","کہکشاں","صحرا","جنگل","جانور","پرندہ","مچھلی","پودا","درخت","پھل","سبزی","فصل","کسان","کھیت","آبپاشی","بارش","طوفان","بجلی","بادل","جھیل","پل","سڑک","نقشہ","فاصلہ","رفتار","انجن","کارخانہ","بازار","بینک","دولت","قرض","تنخواہ","ملازمت"],
+    ["بےروزگاری","ہنر","صلاحیت","دانا","بزرگ","بچہ","نوجوان","پڑوسی","مہمان","میزبان","بادشاہ","شہزادہ","پولیس","چور","مجرم","جیل","سزا","جرم","ہتھیار","تلوار","قلعہ","محل","مسجد","روزہ","صدقہ","حج","پیغمبر","فرشتہ","جنت","معجزہ","برکت","خوف","صدمہ","غم","آنسو","ہنسی","خاموشی","شور","بحث","وعدہ","خیانت","انتقام","غرور","انکساری","مہربانی","تشدد","مہاجر","ہجرت","پاسپورٹ","ہوائی اڈا","جہاز","کشتی","ہیلی کاپٹر","ٹینک","میزائل","اشارہ","پیغام","خط","فون","کیمرہ","تصویر","ویڈیو","بیٹری","تار","ڈیٹا","پاس ورڈ","وائرس","نیٹ ورک","ویب سائٹ","کیمیا","طبیعیات","حیاتیات","ریاضی","جغرافیہ","ادب","زبان","روایت","رسم","عادت","معمول","ہدف","انعام","چیمپئن","مقابلہ","حریف","اتحادی","معاہدہ","مذاکرات","سفیر","پالیسی","احتجاج","ہڑتال","انتشار","نظم","توازن","حقوق","شراکت","ایجاد","دریافت","تجربہ","نظریہ","ثبوت","افواہ","راز","رازداری","ٹیم ورک","تعاون","حکومت","اختیار","اثر","شہرت","شناخت","شخصیت","رویہ","سوچ","رائے","عقیدہ","قدر","اخلاقیات","ضمیر"],
+  ],
+  "SC English": [
+    ["I feel happy when...","My friends think that I...","When I am alone...","My biggest fear is...","I cannot tolerate...","I get angry when...","Success for me means...","My ambition in life is...","If I am insulted...","I work best when...","A leader should...","When I see blood...","My parents are...","I regret that...","At night...","My habit...","When in trouble...","Girls are...","Boys should...","The most important thing...","I like to...","Life is...","When I fail...","My strength is...","I am afraid of...","Money is...","Marriage is...","Leadership means...","The enemy...","My future...","I want to...","When I am tired...","Hard work...","Education is...","The best friend...","I disagree with...","Power is...","When I see a snake...","My mistake...","I enjoy...","A teacher's duty...","The weather...","My greatest wish...","I have never...","If I were...","The country needs...","When people criticize...","My mood...","I am proud of...","Time...","I need...","When I am happy...","I avoid...","A true friend...","The world...","Discipline is...","When I am lonely...","I believe that...","I cannot...","My duty is...","Success brings...","When someone lies...","People often...","My plan for tomorrow...","I am...","Work is...","The government...","I love...","When I am sad...","My weakness is...","Change is...","Friends...","I dream of...","My childhood...","A hero...","I respect...","The truth...","The best advice...","When I am confused...","My health...","I am satisfied with...","If I have money...","I dislike...","A soldier...","The nature...","When I am stressed...","I am good at...","My life's goal...","A challenge...","Honesty is...","I think that I...","The society...","When I hear good news...","I hope...","My passion...","I am grateful for...","Failure teaches...","The most beautiful...","When I am busy...","A good habit...","I can...","The path...","My behavior...","Family planning...","The main aim...","I am worried about...","When I am challenged...","A person...","I hate...","My goal is...","The future...","I strive to...","I am confident...","I choose to...","A good leader...","The world needs...","My biggest mistake...","I prefer...","The rules...","I am capable of..."],
+    ["When someone helps me...","A happy life...","I wonder...","I am ready to...","When I lose...","My opinion...","The country...","I want to be...","When I am excited...","My focus...","I am thankful...","The reality...","I appreciate...","I am determined...","When I see...","A friend in need...","My character...","I have...","I aim to...","My motivation...","The power of...","I trust...","When I am in a team...","My time...","I am committed...","I believe in...","When I achieve...","A great person...","When I am given a command...","My biggest strength as a leader is...","If my subordinates disobey me...","The Pakistan Army...","When I face an emergency...","My relationship with my siblings...","If I am selected for ISSB...","When I see an accident...","My favorite subject in school was...","If I could change one thing...","When people doubt my ability...","My idea of discipline is...","I feel proud when...","When my team loses...","My biggest achievement so far...","If I am given responsibility...","When I am under pressure...","My view on teamwork is...","I take criticism...","When I meet a stranger...","My daily routine includes...","If I had one wish...","When I see injustice...","My role model is...","I handle failure by...","When asked to lead a group...","My opinion about rules is...","If I am wrong...","When I see someone crying...","My biggest motivation is...","I deal with anger by...","When I am praised...","My idea of success is...","If given a second chance...","When I disagree with my senior...","My commitment to duty is...","I overcome fear by...","When my plan fails...","My view on sacrifice is...","If I see corruption...","When I am tested...","My idea of a good officer is...","I value most...","When things go wrong...","My biggest lesson learned...","If I lead a mission...","When I am exhausted...","My attitude toward competition...","I stay motivated by...","When I face a dilemma...","My understanding of patriotism...","If I fail an exam...","When my friend needs help...","My biggest regret...","I control my temper by...","When I am misunderstood...","My idea of bravery is...","If I am asked to sacrifice...","When I see the flag...","My duty toward my family...","I respond to orders by...","When I make a decision...","My idea of loyalty is...","If I had more time...","When under attack...","My biggest inspiration is...","I handle stress through...","When I see poverty...","My view on honesty is...","If I could serve my nation...","When my ideas are rejected...","My biggest fear about ISSB is...","I prepare for challenges by...","When I am promoted...","My idea of teamwork means...","If I am the only one who knows...","When faced with a moral dilemma...","My commitment to my country...","I improve myself by...","When I see soldiers...","My biggest priority is...","If asked to work overtime...","When my subordinate makes a mistake...","My idea of justice is...","I earn trust by...","When I am new to a team...","My biggest weakness is...","If given full authority...","When my superior is wrong...","My reaction to sudden danger...","I keep calm by...","When I see the national flag rise..."],
+    ["My biggest source of confidence...","If I had to choose between duty and family...","When I am far from home...","My idea of sacrifice for the nation...","I stay focused by...","When I see young recruits...","My biggest hope for the future...","If I become an officer...","When faced with limited resources...","My view on obedience...","I earn respect by...","When I see a wounded soldier...","My commitment to training...","If I am posted to a remote area...","When my team disagrees...","My biggest strength under pressure...","I resolve conflicts by...","When given an impossible task...","My idea of national defense...","If I lead during a crisis...","When I see corruption in my unit...","My biggest lesson from failure...","I handle authority by...","When I am tested physically...","My view on discipline in the army...","If asked to make a hard choice...","When I see my country's flag abroad...","My best quality as a person...","When my orders are questioned...","I define courage as...","My reaction to sudden criticism...","When I am left in charge...","My idea of a strong nation...","I judge people by...","When my efforts go unnoticed...","My relationship with authority...","I recover from setbacks by...","When my team needs a decision fast...","My idea of true freedom...","I balance work and rest by...","When I am the youngest in the room...","My biggest test of patience...","I show respect by...","When plans change suddenly...","My idea of national unity...","I face uncertainty by...","When I am asked to compromise...","My greatest support comes from...","I define leadership as...","When I see wasted potential...","My idea of a fair decision...","I stay humble by...","When success comes easily...","My idea of hard work paying off...","I handle jealousy by...","When someone breaks my trust...","My idea of a good friend...","I plan for the future by...","When I am given feedback...","My idea of service to others...","I overcome laziness by...","When I disagree with the majority...","My idea of national pride...","I face my weaknesses by...","When I am given a deadline...","My idea of self-discipline...","I respond to failure by...","When I see a colleague struggling...","My idea of a balanced life...","I earn my place in a team by...","When faced with two good options...","My idea of moral courage...","I build confidence by...","When I am underestimated...","My idea of civic duty...","I stay grounded by...","When I achieve something small...","My idea of long-term success...","I show gratitude by...","When I make a promise...","My idea of a peaceful home...","I approach new challenges by...","When my patience is tested...","My idea of good governance...","I keep my word by...","When I lead by example...","My idea of national service...","I handle disappointment by...","When I am recognized for my work...","My idea of true wealth...","I respond to pressure by...","When I stand for something...","My idea of a disciplined mind...","I overcome self-doubt by...","When I am asked to change my plan...","My idea of dependable leadership...","I face rejection by...","When my values are tested...","My idea of a strong team...","I gain experience by...","When I am given advice...","My idea of national progress...","I handle competition by...","When I am proven wrong...","My idea of quiet strength...","I stay positive by...","When my resolve is tested...","My idea of humble leadership...","I show empathy by...","When I face a tough crowd...","My idea of a meaningful career...","I keep my composure by...","When my team looks to me...","My idea of steady progress...","I turn setbacks into...","When the odds are against me...","My idea of self-respect...","I earn loyalty by...","When I face an unfamiliar task...","My idea of national resilience..."],
+  ],
+  "SC Urdu": [
+    ["جب مجھے غصہ آتا ہے تو...","میری سب سے بڑی خواہش یہ ہے کہ...","جب میں ناکام ہوتا ہوں تو...","میرے دوست میرے بارے میں یہ سوچتے ہیں...","میں اپنی زندگی میں یہ بننا چاہتا ہوں...","جب کوئی میری مدد مانگتا ہے تو...","مجھے یہ کام کرنا بہت پسند ہے...","میری زندگی کا مقصد ہے...","جب میں مشکل میں ہوتا ہوں...","مجھے لوگوں سے یہ امید ہے کہ...","ایک لیڈر کو چاہیے...","جب میں خون دیکھتا ہوں...","میرے والدین...","مجھے افسوس ہے کہ...","رات کے وقت...","میری عادت...","جب مصیبت آئے...","لڑکیاں...","لڑکوں کو چاہیے...","سب سے اہم چیز...","مجھے پسند ہے...","زندگی ہے...","میری طاقت ہے...","مجھے ڈر لگتا ہے...","پیسہ...","شادی...","قیادت کا مطلب...","دشمن...","میرا مستقبل...","میں چاہتا ہوں...","جب میں تھک جاتا ہوں...","محنت...","تعلیم...","سب سے اچھا دوست...","میں اختلاف کرتا ہوں...","طاقت...","جب میں سانپ دیکھتا ہوں...","میری غلطی...","میں لطف اٹھاتا ہوں...","استاد کا فرض...","موسم...","میں نے کبھی نہیں...","اگر میں ہوتا...","ملک کو ضرورت ہے...","جب لوگ تنقید کرتے ہیں...","میرا موڈ...","مجھے فخر ہے...","وقت...","مجھے ضرورت ہے...","جب میں خوش ہوتا ہوں...","میں پرہیز کرتا ہوں...","ایک سچا دوست...","دنیا...","نظم و ضبط...","جب میں اکیلا ہوتا ہوں...","میرا یقین ہے...","میں نہیں کر سکتا...","میرا فرض ہے...","کامیابی...","جب کوئی جھوٹ بولتا ہے...","لوگ اکثر...","کل کے لیے میرا منصوبہ...","میں ہوں...","کام ہے...","حکومت...","میں پیار کرتا ہوں...","جب میں اداس ہوتا ہوں...","میری کمزوری...","تبدیلی...","دوست...","میں خواب دیکھتا ہوں...","میرا بچپن...","ایک ہیرو...","میں عزت کرتا ہوں...","سچ...","بہترین مشورہ...","جب میں الجھن میں ہوں...","میری صحت...","میں مطمئن ہوں...","اگر میرے پاس پیسے ہوں...","مجھے ناپسند ہے...","ایک فوجی...","فطرت...","جب میں دباؤ میں ہوں...","میں اچھا ہوں...","میری زندگی کا ہدف...","ایک چیلنج...","ایمانداری...","میرا خیال ہے کہ...","معاشرہ...","جب میں اچھی خبر سنتا ہوں...","مجھے امید ہے...","میرا جنون...","میں شکر گزار ہوں...","ناکامی سکھاتی ہے...","سب سے خوبصورت...","جب میں مصروف ہوں...","ایک اچھی عادت...","میں کر سکتا ہوں...","راستہ...","میرا رویہ...","خاندانی منصوبہ بندی...","بنیادی مقصد...","مجھے فکر ہے...","جب مجھے چیلنج کیا جائے...","ایک شخص...","میں نفرت کرتا ہوں...","میرا ہدف...","مستقبل...","میں کوشش کرتا ہوں...","میں پر اعتماد ہوں...","میں انتخاب کرتا ہوں...","ایک اچھا لیڈر...","دنیا کو ضرورت ہے...","میری سب سے بڑی غلطی...","میں ترجیح دیتا ہوں...","قوانین...","میں اہل ہوں...","جب کوئی میری مدد کرے...","ایک خوشگوار زندگی..."],
+    ["میں سوچتا ہوں...","میں تیار ہوں...","جب میں ہارتا ہوں...","میری رائے...","ملک...","میں بننا چاہتا ہوں...","جب میں پرجوش ہوں...","میری توجہ...","جب مجھے حکم دیا جاتا ہے تو...","ایک لیڈر کی حیثیت سے میری سب سے بڑی طاقت...","اگر میرے ماتحت میری بات نہ مانیں تو...","پاک فوج...","جب میں کسی ہنگامی صورتحال کا سامنا کرتا ہوں...","اپنے بہن بھائیوں کے ساتھ میرا تعلق...","اگر مجھے آئی ایس ایس بی میں منتخب کیا جائے...","جب میں کوئی حادثہ دیکھتا ہوں...","اسکول میں میرا پسندیدہ مضمون تھا...","اگر میں ایک چیز بدل سکوں تو...","جب لوگ میری صلاحیت پر شک کریں...","نظم و ضبط کے بارے میں میرا خیال ہے...","مجھے فخر محسوس ہوتا ہے جب...","جب میری ٹیم ہار جائے...","اب تک میری سب سے بڑی کامیابی...","اگر مجھے ذمہ داری دی جائے...","ٹیم ورک کے بارے میں میری رائے...","میں تنقید کو...","جب میں کسی اجنبی سے ملتا ہوں...","میرا روزمرہ معمول شامل ہے...","اگر میری ایک خواہش پوری ہو...","جب میں ناانصافی دیکھتا ہوں...","میرا آئیڈیل...","میں ناکامی سے نمٹتا ہوں...","جب مجھے کسی گروہ کی قیادت کرنے کو کہا جائے...","اگر میں غلط ہوں تو...","جب میں کسی کو روتا دیکھوں...","میری سب سے بڑی تحریک...","میں غصے پر قابو پاتا ہوں...","جب میری تعریف کی جائے...","کامیابی کا میرا تصور...","اگر مجھے دوسرا موقع ملے...","جب میں اپنے افسر سے اختلاف کروں...","فرض سے میری وابستگی...","میں خوف پر قابو پاتا ہوں...","جب میرا منصوبہ ناکام ہو جائے...","قربانی کے بارے میں میری رائے...","اگر میں بدعنوانی دیکھوں...","جب میرا امتحان لیا جائے...","ایک اچھے افسر کا میرا تصور...","میرے لیے سب سے قیمتی چیز...","جب حالات خراب ہو جائیں...","میرا سب سے بڑا سبق...","اگر مجھے مشن کی قیادت کرنی ہو...","جب میں تھکاوٹ محسوس کروں...","مقابلے کے بارے میں میرا رویہ...","میں حوصلہ برقرار رکھتا ہوں...","جب مجھے کسی مشکل کا سامنا ہو...","حب الوطنی کے بارے میں میری سمجھ...","اگر میں امتحان میں ناکام ہو جاؤں...","جب میرے دوست کو مدد کی ضرورت ہو...","میرا سب سے بڑا افسوس...","میں اپنے مزاج پر قابو رکھتا ہوں...","جب مجھے غلط سمجھا جائے...","بہادری کا میرا تصور...","اگر مجھ سے قربانی مانگی جائے...","جب میں پرچم دیکھتا ہوں...","اپنے خاندان کے لیے میرا فرض...","میں احکامات کا جواب دیتا ہوں...","جب میں کوئی فیصلہ کرتا ہوں...","وفاداری کا میرا تصور...","اگر مجھے مزید وقت ملے...","حملے کی صورت میں...","میں دباؤ کا مقابلہ کرتا ہوں...","جب میں غربت دیکھتا ہوں...","ایمانداری کے بارے میں میری رائے...","اگر مجھے اپنی قوم کی خدمت کا موقع ملے...","جب میرے خیالات مسترد ہوں...","آئی ایس ایس بی کے بارے میں میرا سب سے بڑا خوف...","میں چیلنجز کے لیے تیاری کرتا ہوں...","جب مجھے ترقی دی جائے...","ٹیم ورک کا میرا مطلب...","اگر میں واحد شخص ہوں جو جانتا ہوں...","اخلاقی مخمصے کا سامنا ہونے پر...","اپنے ملک سے میری وابستگی...","میں خود کو بہتر بناتا ہوں...","جب میں فوجیوں کو دیکھتا ہوں...","میری سب سے بڑی ترجیح...","اگر مجھ سے اضافی کام کرنے کو کہا جائے...","جب میرا ماتحت غلطی کرے...","انصاف کا میرا تصور...","میں اعتماد حاصل کرتا ہوں...","جب میں ٹیم میں نیا ہوں...","میری سب سے بڑی کمزوری...","اگر مجھے مکمل اختیار دیا جائے...","جب میرا افسر غلط ہو...","اچانک خطرے پر میرا ردعمل...","میں پرسکون رہتا ہوں...","جب قومی پرچم بلند ہوتا ہے...","اعتماد کا میرا سب سے بڑا ذریعہ...","اگر مجھے فرض اور خاندان میں سے ایک چننا پڑے...","جب میں گھر سے دور ہوں...","قوم کے لیے قربانی کا میرا تصور...","میں توجہ مرکوز رکھتا ہوں...","جب میں نئے بھرتی ہونے والوں کو دیکھتا ہوں...","مستقبل کے لیے میری سب سے بڑی امید...","اگر میں افسر بن جاؤں...","محدود وسائل کا سامنا ہونے پر...","اطاعت کے بارے میں میری رائے...","میں عزت کماتا ہوں...","جب میں کسی زخمی فوجی کو دیکھتا ہوں...","تربیت سے میری وابستگی...","اگر مجھے دور دراز علاقے میں تعینات کیا جائے...","جب میری ٹیم میں اختلاف ہو...","دباؤ میں میری سب سے بڑی طاقت...","میں تنازعات حل کرتا ہوں...","جب مجھے ناممکن کام دیا جائے...","قومی دفاع کا میرا تصور...","اگر مجھے بحران میں قیادت کرنی ہو...","جب میں اپنی یونٹ میں بدعنوانی دیکھوں...","ناکامی سے میرا سب سے بڑا سبق...","میں اختیار کے ساتھ کیسے پیش آتا ہوں..."],
+    ["جب میرا جسمانی امتحان لیا جائے...","فوج میں نظم و ضبط کے بارے میں میری رائے...","اگر مجھے کوئی سخت فیصلہ کرنا پڑے...","جب میں بیرون ملک اپنے ملک کا پرچم دیکھوں...","ایک شخص کے طور پر میری بہترین خوبی...","جب میرے احکامات پر سوال اٹھایا جائے...","میں بہادری کی تعریف اس طرح کرتا ہوں...","اچانک تنقید پر میرا ردعمل...","جب مجھے ذمہ داری سونپی جائے...","ایک مضبوط قوم کا میرا تصور...","میں لوگوں کو اس بنیاد پر پرکھتا ہوں...","جب میری کوششوں کو نظر انداز کیا جائے...","اختیار کے ساتھ میرا تعلق...","میں ناکامیوں سے یوں سنبھلتا ہوں...","جب میری ٹیم کو فوری فیصلے کی ضرورت ہو...","حقیقی آزادی کا میرا تصور...","میں کام اور آرام میں توازن یوں رکھتا ہوں...","جب میں کمرے میں سب سے چھوٹا ہوں...","صبر کا سب سے بڑا امتحان...","میں عزت اس طرح ظاہر کرتا ہوں...","جب اچانک منصوبے بدل جائیں...","قومی اتحاد کا میرا تصور...","میں غیر یقینی صورتحال کا سامنا یوں کرتا ہوں...","جب مجھے سمجھوتہ کرنے کو کہا جائے...","میری سب سے بڑی حمایت آتی ہے...","قیادت کی میری تعریف...","جب میں ضائع ہوتی صلاحیت دیکھوں...","منصفانہ فیصلے کا میرا تصور...","میں انکساری یوں برقرار رکھتا ہوں...","جب کامیابی آسانی سے مل جائے...","محنت کا پھل ملنے کا میرا تصور...","میں حسد کا مقابلہ یوں کرتا ہوں...","جب کوئی میرا اعتماد توڑے...","ایک اچھے دوست کا میرا تصور...","میں مستقبل کی منصوبہ بندی یوں کرتا ہوں...","جب مجھے رائے دی جائے...","دوسروں کی خدمت کا میرا تصور...","میں سستی پر یوں قابو پاتا ہوں...","جب میں اکثریت سے اختلاف کروں...","قومی فخر کا میرا تصور...","میں اپنی کمزوریوں کا سامنا یوں کرتا ہوں...","جب مجھے وقت کی پابندی دی جائے...","خود نظم و ضبط کا میرا تصور...","میں ناکامی پر یوں ردعمل دیتا ہوں...","جب میں کسی ساتھی کو جدوجہد کرتا دیکھوں...","متوازن زندگی کا میرا تصور...","میں ٹیم میں اپنا مقام یوں بناتا ہوں...","جب دو اچھے راستوں میں سے ایک چننا ہو...","اخلاقی جرات کا میرا تصور...","میں اعتماد یوں پیدا کرتا ہوں...","جب مجھے کم تر سمجھا جائے...","شہری فرض کا میرا تصور...","میں زمین سے جڑا رہتا ہوں یوں...","جب میں چھوٹی سی کامیابی حاصل کروں...","طویل مدتی کامیابی کا میرا تصور...","میں شکرگزاری یوں ظاہر کرتا ہوں...","جب میں کوئی وعدہ کروں...","پرامن گھر کا میرا تصور...","میں نئے چیلنجز کا سامنا یوں کرتا ہوں...","جب میرے صبر کا امتحان لیا جائے...","اچھی حکمرانی کا میرا تصور...","میں اپنی بات یوں پوری کرتا ہوں...","جب میں مثال کے ذریعے قیادت کروں...","قومی خدمت کا میرا تصور...","میں مایوسی سے یوں نمٹتا ہوں...","جب میرے کام کو سراہا جائے...","حقیقی دولت کا میرا تصور...","میں دباؤ پر یوں ردعمل دیتا ہوں...","جب میں کسی بات پر ڈٹ جاؤں...","نظم و ضبط والے ذہن کا میرا تصور...","میں خود شکی پر یوں قابو پاتا ہوں...","جب مجھے منصوبہ بدلنے کو کہا جائے...","قابل اعتماد قیادت کا میرا تصور...","میں مسترد ہونے کا سامنا یوں کرتا ہوں...","جب میری اقدار کا امتحان لیا جائے...","مضبوط ٹیم کا میرا تصور...","میں تجربہ یوں حاصل کرتا ہوں...","جب مجھے مشورہ دیا جائے...","قومی ترقی کا میرا تصور...","میں مقابلے کا سامنا یوں کرتا ہوں...","جب مجھے غلط ثابت کیا جائے...","خاموش طاقت کا میرا تصور...","میں مثبت رہتا ہوں یوں...","جب میرے عزم کا امتحان لیا جائے...","عاجزانہ قیادت کا میرا تصور...","میں ہمدردی یوں ظاہر کرتا ہوں...","جب مجھے مشکل حالات کا سامنا ہو...","بامقصد کیریئر کا میرا تصور...","میں اپنا ضبط یوں برقرار رکھتا ہوں...","جب ٹیم میری طرف دیکھے...","مستقل ترقی کا میرا تصور...","میں ناکامیوں کو یوں بدلتا ہوں...","جب حالات میرے خلاف ہوں...","خود احترامی کا میرا تصور...","میں وفاداری یوں کماتا ہوں...","جب مجھے نامانوس کام دیا جائے...","قومی استقامت کا میرا تصور...","میں اعتماد یوں قائم کرتا ہوں...","جب مجھے بغیر اختیار کے قیادت کرنی ہو...","خاموش اعتماد کا میرا تصور...","جب میں کسی نئی جگہ جاتا ہوں...","میری زندگی کا سب سے یادگار لمحہ...","جب مجھے تنہا فیصلہ کرنا پڑے...","میرا خاندان مجھ سے یہ توقع رکھتا ہے...","جب میں کسی بڑے مجمع کے سامنے ہوں...","میری سب سے بڑی طاقت میرا ایمان ہے کیونکہ...","جب مجھے وسائل کی کمی کا سامنا ہو...","استاد کے احترام میں میرا رویہ...","جب کوئی مجھ سے مدد کی درخواست کرے...","میری زندگی کا نقطہ نظر...","جب میں کسی مقابلے میں شریک ہوں...","معاشرتی خدمت کے بارے میں میرا خیال...","جب مجھے کسی کی غلطی معاف کرنی ہو...","میرا سب سے بڑا خواب...","جب حالات میری توقع کے برعکس ہوں...","انسانیت کی خدمت کا میرا جذبہ...","جب مجھے کسی مشکل فیصلے کا سامنا ہو...","میری کامیابی کا راز...","جب میں اپنے وطن سے دور ہوں...","نظم و ضبط کی اہمیت میرے نزدیک..."],
+  ],
+};
+
+  // ---------- State ----------
+  let currentCategory = '';
+  let currentTestIndex = 0;
+  let currentList = [];
+  let currentIndex = 0;
+  let timeLeft = 10;
+  let baseDuration = 10;
+  let intervalId = null;
+  let isPaused = false;
+
+  const RADIUS = 52;
+  const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+  const ringFg = document.getElementById('ring-fg');
+  ringFg.style.strokeDasharray = CIRCUMFERENCE;
+
+  const isUrduMode = (type) => type.includes('Urdu');
+
+  // ---------- Screen navigation ----------
+  function openPicker(category) {
+    currentCategory = category;
+    document.getElementById('menu').classList.add('hidden');
+    document.getElementById('test-picker').classList.remove('hidden');
+    document.getElementById('picker-title').innerText = category + ' — choose a test';
+    document.getElementById('main-title').innerText = category;
+
+    const grid = document.getElementById('test-grid');
+    grid.innerHTML = '';
+    data[category].forEach((list, idx) => {
+      const card = document.createElement('div');
+      card.className = 'test-card';
+      card.onclick = () => startTest(category, idx);
+      card.innerHTML = `
+        <div class="num">${idx + 1}</div>
+        <div class="label">Test ${idx + 1}</div>
+        <div class="count">${list.length} items</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function backToMenu() {
+    document.getElementById('test-picker').classList.add('hidden');
+    document.getElementById('menu').classList.remove('hidden');
+    document.getElementById('main-title').innerText = 'Psych Test Practice';
+  }
+
+  function backToPickerFromFinish() {
+    document.getElementById('finish-area').classList.add('hidden');
+    openPicker(currentCategory);
+  }
+
+  // ---------- Test engine ----------
+  function startTest(category, testIndex) {
+    currentCategory = category;
+    currentTestIndex = testIndex;
+    currentList = data[category][testIndex];
+    currentIndex = 0;
+    baseDuration = parseInt(document.getElementById('durationSelect').value, 10);
+
+    document.getElementById('test-picker').classList.add('hidden');
+    document.getElementById('finish-area').classList.add('hidden');
+    document.getElementById('test-area').classList.remove('hidden');
+    document.getElementById('main-title').innerText = category + ' — Test ' + (testIndex + 1);
+    document.getElementById('mode-label').innerText = category + ' · Test ' + (testIndex + 1);
+
+    const wordDisplay = document.getElementById('word-display');
+    wordDisplay.classList.toggle('urdu-text', isUrduMode(category));
+
+    runItem();
+  }
+
+  function runItem() {
+    if (currentIndex >= currentList.length) {
+      finishTest();
+      return;
+    }
+
+    const wordDisplay = document.getElementById('word-display');
+    wordDisplay.innerText = currentList[currentIndex];
+
+    document.getElementById('progress-text').innerText = (currentIndex + 1) + ' / ' + currentList.length;
+    document.getElementById('progress-fill').style.width = ((currentIndex) / currentList.length * 100) + '%';
+
+    timeLeft = baseDuration;
+    updateRing(timeLeft, baseDuration);
+    document.getElementById('timer-num').innerText = timeLeft;
+
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      if (isPaused) return;
+      timeLeft--;
+      document.getElementById('timer-num').innerText = timeLeft;
+      updateRing(timeLeft, baseDuration);
+      if (timeLeft <= 0) {
+        clearInterval(intervalId);
+        currentIndex++;
+        runItem();
+      }
+    }, 1000);
+  }
+
+  function updateRing(t, total) {
+    const ratio = Math.max(t, 0) / total;
+    ringFg.style.strokeDashoffset = CIRCUMFERENCE * (1 - ratio);
+    ringFg.style.stroke = t <= 3 ? '#ef4444' : '#38bdf8';
+  }
+
+  function togglePause() {
+    isPaused = !isPaused;
+    document.getElementById('pauseBtn').innerText = isPaused ? '▶ Resume' : '⏸ Pause';
+  }
+
+  function skipItem() {
+    clearInterval(intervalId);
+    currentIndex++;
+    runItem();
+  }
+
+  function finishTest() {
+    clearInterval(intervalId);
+    document.getElementById('test-area').classList.add('hidden');
+    document.getElementById('finish-area').classList.remove('hidden');
+    document.getElementById('finish-summary').innerText =
+      'You completed Test ' + (currentTestIndex + 1) + ' (' + currentList.length + ' items) in ' + currentCategory + '. Try another test or switch categories.';
+  }
+
+  function exitTest() {
+    clearInterval(intervalId);
+    isPaused = false;
+    document.getElementById('pauseBtn').innerText = '⏸ Pause';
+    document.getElementById('test-area').classList.add('hidden');
+    document.getElementById('finish-area').classList.add('hidden');
+    document.getElementById('test-picker').classList.add('hidden');
+    document.getElementById('menu').classList.remove('hidden');
+    document.getElementById('main-title').innerText = 'Psych Test Practice';
+  }
+</script>
+</body>
+</html>
